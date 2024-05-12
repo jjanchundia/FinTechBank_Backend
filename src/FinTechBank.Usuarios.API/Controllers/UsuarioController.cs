@@ -12,12 +12,17 @@ namespace FinTechBank.Usuarios.API.Controllers
     {
         // GET: api/<UsuarioController>
         private readonly IMediator _mediator;
-        private readonly IConfiguration _config;
 
-        public UsuarioController(IMediator mediator, IConfiguration config)
+        public UsuarioController(IMediator mediator)
         {
             _mediator = mediator;
-            _config = config;
+        }
+
+        [HttpGet("{usuarioId:int}")]
+        public async Task<IActionResult> ConsultarUsuarioPorId(int usuarioId)
+        {
+            var response = await _mediator.Send(new ConsultarUsuario.ConsultarUsuarioCommand() { UsuarioId = usuarioId });
+            return Ok(response);
         }
 
         [HttpPost("register")]

@@ -20,5 +20,6 @@ namespace FinTechBank.Domain
         public string ProfesionOcupacion { get; set; }
         public string Genero { get; set; }
         public string Nacionalidad { get; set; }
+        public int UsuarioId { get; set; }
     }
 }

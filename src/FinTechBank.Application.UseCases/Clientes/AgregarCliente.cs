@@ -2,6 +2,7 @@
 using FinTechBank.Application.Dtos;
 using FinTechBank.Domain;
 using MediatR;
+using Cliente.Services.RemoteInterface;
 
 namespace FinTechBank.Application.UseCases.Clientes
 {
@@ -24,19 +25,24 @@ namespace FinTechBank.Application.UseCases.Clientes
             public string ProfesionOcupacion { get; set; }
             public string Genero { get; set; }
             public string Nacionalidad { get; set; }
+            public int UsuarioId { get; set; }
         }
 
         public class Handler : IRequestHandler<AgregarClienteCommand, Result<ClienteDto>>
         {
             private readonly ApplicationDbContext _dbcontext;
-            public Handler(ApplicationDbContext dbcontext)
+            private readonly IUsuarioService _usuarioService;
+            public Handler(ApplicationDbContext dbcontext, IUsuarioService usuarioService)
             {
                 _dbcontext = dbcontext;
+                _usuarioService = usuarioService;
             }
 
             public async Task<Result<ClienteDto>> Handle(AgregarClienteCommand request, CancellationToken cancellationToken)
             {
-                var nuevo = new Cliente()
+                var usuario = await _usuarioService.GetUsuario(request.UsuarioId);
+
+                var nuevo = new Domain.Cliente()
                 {
                     ClienteId = request.ClienteId,
                     Nombre = request.Nombre,
@@ -52,7 +58,8 @@ namespace FinTechBank.Application.UseCases.Clientes
                     NumeroIdentificacion = request.NumeroIdentificacion,
                     ProfesionOcupacion = request.ProfesionOcupacion,
                     Genero = request.Genero,
-                    Nacionalidad = request.Nacionalidad
+                    Nacionalidad = request.Nacionalidad,
+                    UsuarioId = request.UsuarioId
                 };
 
                 await _dbcontext.Cliente.AddAsync(nuevo);
@@ -76,7 +83,13 @@ namespace FinTechBank.Application.UseCases.Clientes
                     NumeroIdentificacion = request.NumeroIdentificacion,
                     ProfesionOcupacion = request.ProfesionOcupacion,
                     Genero = request.Genero,
-                    Nacionalidad = request.Nacionalidad
+                    Nacionalidad = request.Nacionalidad,
+                    UsuarioId = request.UsuarioId,
+                    Nombres = usuario.usuario.Nombres,
+                    Apellidos = usuario.usuario.Apellidos,
+                    Username = usuario.usuario.Username,
+                    Password = usuario.usuario.Password,
+                    Role = usuario.usuario.Role
                 });
             }
         }

@@ -9,6 +9,8 @@ using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Cliente.Services.RemoteInterface;
+using Cliente.Services.RemoteServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,9 +60,16 @@ builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetEx
 
 //Inyectamos los servicios a nuestra clase program.cs
 builder.Services.AddScoped<IRequestHandler<ConsultarCliente.ConsultarClienteRequest, Result<List<ClienteDto>>>, ConsultarCliente.Handler>();
+builder.Services.AddScoped<IRequestHandler<ConsultarClientePorId.ConsultarClientePorIdCommand, Result<ClienteDto>>, ConsultarClientePorId.Handler>();
 builder.Services.AddScoped<IRequestHandler<AgregarCliente.AgregarClienteCommand, Result<ClienteDto>>, AgregarCliente.Handler>();
 builder.Services.AddScoped<IRequestHandler<EliminarCliente.EliminarClienteCommand, Result<string>>, EliminarCliente.Handler>();
-builder.Services.AddScoped<IRequestHandler<EditarCliente.EditarClienteCommand, Result<ClienteDto>>, EditarCliente.Handler>(); 
+builder.Services.AddScoped<IRequestHandler<EditarCliente.EditarClienteCommand, Result<ClienteDto>>, EditarCliente.Handler>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+builder.Services.AddHttpClient("Usuario", config =>
+{
+    config.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Services:Usuario") ?? string.Empty);
+});
 
 // Configuración de Swagger
 builder.Services.AddSwaggerGen(c =>

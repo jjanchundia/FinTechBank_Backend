@@ -7,14 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cliente.Services\Cliente.Services.csproj" />
-    <ProjectReference Include="..\FinTechBank.Application.Dtos\FinTechBank.Application.Dtos.csproj" />
     <ProjectReference Include="..\FinTechBank.Domain\FinTechBank.Domain.csproj" />
-    <ProjectReference Include="..\FinTechBank.Persistence\FinTechBank.Persistence.csproj" />
+    <ProjectReference Include="..\FinTechBank.Usuario.Domain\FinTechBank.Usuario.Domain.csproj" />
   </ItemGroup>
 
 </Project>

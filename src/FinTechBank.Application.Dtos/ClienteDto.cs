@@ -18,5 +18,11 @@ namespace FinTechBank.Application.Dtos
         public string ProfesionOcupacion { get; set; }
         public string Genero { get; set; }
         public string Nacionalidad { get; set; }
+        public int UsuarioId { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
     }
 }

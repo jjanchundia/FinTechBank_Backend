@@ -1,4 +1,5 @@
 ﻿using FinTechBank.Application.UseCases.Clientes;
+using FinTechBank.Usuario.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ namespace FinTechBank.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     public class ClienteController : ControllerBase
     {
         //Uso de Mediatr que implementa el patrón Mediator en C#.
@@ -30,9 +31,9 @@ namespace FinTechBank.API.Controllers
         }
 
         [HttpGet("{clienteId:int}")]
-        public async Task<IActionResult> ConsultarClientePorId(int ClienteId)
+        public async Task<IActionResult> ConsultarClientePorId(int clienteId)
         {
-            var response = await _mediator.Send(new ConsultarCliente.ConsultarClienteRequest());
+            var response = await _mediator.Send(new ConsultarClientePorId.ConsultarClientePorIdCommand() { ClienteId = clienteId });
             return Ok(response);
         }
 
@@ -43,7 +44,7 @@ namespace FinTechBank.API.Controllers
             return Ok(response);
         }
 
-        [HttpPost("editar")]
+        [HttpPut("editar")]
         public async Task<IActionResult> EditCliente(EditarCliente.EditarClienteCommand command)
         {
             var response = await _mediator.Send(command);

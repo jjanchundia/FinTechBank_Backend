@@ -3,6 +3,7 @@ using FinTechBank.Application.Dtos;
 using FinTechBank.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Cliente.Services.RemoteInterface;
 
 namespace FinTechBank.Application.UseCases.Clientes
 {
@@ -15,34 +16,51 @@ namespace FinTechBank.Application.UseCases.Clientes
         public class Handler : IRequestHandler<ConsultarClienteRequest, Result<List<ClienteDto>>>
         {
             private readonly ApplicationDbContext _dbcontext;
+            private readonly IUsuarioService _usuarioService;
 
-            public Handler(ApplicationDbContext dbcontext)
+            public Handler(ApplicationDbContext dbcontext, IUsuarioService usuarioService)
             {
                 _dbcontext = dbcontext;
+                _usuarioService = usuarioService;
             }
 
             public async Task<Result<List<ClienteDto>>> Handle(ConsultarClienteRequest request, CancellationToken cancellationToken)
             {
                 var clientes = await _dbcontext.Cliente.ToListAsync();
-                var clientesDto = clientes.Select(cliente => new ClienteDto
-                {
-                    ClienteId = cliente.ClienteId,
-                    Nombre = cliente.Nombre,
-                    Apellido = cliente.Apellido,
-                    NumeroCuenta = cliente.NumeroCuenta,
-                    Saldo = cliente.Saldo,
-                    FechaNacimiento = cliente.FechaNacimiento,
-                    Direccion = cliente.Direccion,
-                    Telefono = cliente.Telefono,
-                    Correo = cliente.Correo,
-                    TipoCliente = cliente.TipoCliente,
-                    EstadoCivil = cliente.EstadoCivil,
-                    NumeroIdentificacion = cliente.NumeroIdentificacion,
-                    ProfesionOcupacion = cliente.ProfesionOcupacion,
-                    Genero = cliente.Genero,
-                    Nacionalidad = cliente.Nacionalidad,
-                }).ToList();
+                var clientesDto = new List<ClienteDto>();
 
+                foreach (var item in clientes)
+                {
+                    var usuario = await _usuarioService.GetUsuario(item.UsuarioId);
+
+                    var clienteDto = new ClienteDto
+                    {
+                        ClienteId = item.ClienteId,
+                        Nombre = item.Nombre,
+                        Apellido = item.Apellido,
+                        NumeroCuenta = item.NumeroCuenta,
+                        Saldo = item.Saldo,
+                        FechaNacimiento = item.FechaNacimiento,
+                        Direccion = item.Direccion,
+                        Telefono = item.Telefono,
+                        Correo = item.Correo,
+                        TipoCliente = item.TipoCliente,
+                        EstadoCivil = item.EstadoCivil,
+                        NumeroIdentificacion = item.NumeroIdentificacion,
+                        ProfesionOcupacion = item.ProfesionOcupacion,
+                        Genero = item.Genero,
+                        Nacionalidad = item.Nacionalidad,
+                        //Datos del usuario que vienen del otro microservicio
+                        UsuarioId = usuario.usuario.Id,
+                        Nombres = usuario.usuario.Nombres,
+                        Apellidos = usuario.usuario.Apellidos,
+                        Username = usuario.usuario.Username,
+                        Password = usuario.usuario.Password,
+                        Role = usuario.usuario.Role
+                    };
+
+                    clientesDto.Add(clienteDto);
+                }
                 return Result<List<ClienteDto>>.Success(clientesDto);
             }
         }

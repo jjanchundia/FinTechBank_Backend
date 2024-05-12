@@ -35,15 +35,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Application.Use
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Persistence", "src\FinTechBank.Persistence\FinTechBank.Persistence.csproj", "{D0235F26-F04B-4D12-B500-E3861B6C49CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuarios.API", "src\FinTechBank.Usuarios.API\FinTechBank.Usuarios.API.csproj", "{3BAAE009-6FA9-4210-BC1E-D2194CF95E3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Usuarios.API", "src\FinTechBank.Usuarios.API\FinTechBank.Usuarios.API.csproj", "{3BAAE009-6FA9-4210-BC1E-D2194CF95E3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuario.Application.UseCases", "src\FinTechBank.Usuario.Application.UseCases\FinTechBank.Usuario.Application.UseCases.csproj", "{941131B7-DCE6-492E-A1AF-A3C24DA5967D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Usuario.Application.UseCases", "src\FinTechBank.Usuario.Application.UseCases\FinTechBank.Usuario.Application.UseCases.csproj", "{941131B7-DCE6-492E-A1AF-A3C24DA5967D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuario.Dtos", "src\FinTechBank.Usuario.Dtos\FinTechBank.Usuario.Dtos.csproj", "{86F9428F-494D-4BC9-8764-99ECE1FADFF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Usuario.Dtos", "src\FinTechBank.Usuario.Dtos\FinTechBank.Usuario.Dtos.csproj", "{86F9428F-494D-4BC9-8764-99ECE1FADFF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuario.Domain", "src\FinTechBank.Usuario.Domain\FinTechBank.Usuario.Domain.csproj", "{E17B0405-F7E2-4595-B6F4-BCC130297940}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Usuario.Domain", "src\FinTechBank.Usuario.Domain\FinTechBank.Usuario.Domain.csproj", "{E17B0405-F7E2-4595-B6F4-BCC130297940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuario.Persistence", "src\FinTechBank.Usuario.Persistence\FinTechBank.Usuario.Persistence.csproj", "{094F8C46-36EA-443D-83C3-D1FCB6878CA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Usuario.Persistence", "src\FinTechBank.Usuario.Persistence\FinTechBank.Usuario.Persistence.csproj", "{094F8C46-36EA-443D-83C3-D1FCB6878CA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{72C89EB4-81A0-4A4E-A39A-E651D8C76C44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cliente.Services", "src\Cliente.Services\Cliente.Services.csproj", "{B751E46E-3C11-4681-B12A-3CEEB1311610}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,10 @@ Global
 		{094F8C46-36EA-443D-83C3-D1FCB6878CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{094F8C46-36EA-443D-83C3-D1FCB6878CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{094F8C46-36EA-443D-83C3-D1FCB6878CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B751E46E-3C11-4681-B12A-3CEEB1311610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B751E46E-3C11-4681-B12A-3CEEB1311610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B751E46E-3C11-4681-B12A-3CEEB1311610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B751E46E-3C11-4681-B12A-3CEEB1311610}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,8 @@ Global
 		{86F9428F-494D-4BC9-8764-99ECE1FADFF6} = {72E2EC2C-6D95-4632-B100-FEBD885F5A5A}
 		{E17B0405-F7E2-4595-B6F4-BCC130297940} = {BCDFA4DD-EC7E-4CF9-817B-FB870F0FCC80}
 		{094F8C46-36EA-443D-83C3-D1FCB6878CA3} = {02FAEF3B-045E-4AF6-8379-04F7DBF17926}
+		{72C89EB4-81A0-4A4E-A39A-E651D8C76C44} = {56EAC9E2-4901-4042-9E5D-AB0D003E2787}
+		{B751E46E-3C11-4681-B12A-3CEEB1311610} = {72C89EB4-81A0-4A4E-A39A-E651D8C76C44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C8B5CC2-D758-4968-ABCF-5A6E08179CAD}
