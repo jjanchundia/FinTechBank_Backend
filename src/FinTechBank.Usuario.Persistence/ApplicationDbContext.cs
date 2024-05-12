@@ -1,10 +1,10 @@
-﻿using FinTechBank.Domain;
+﻿using U = FinTechBank.Usuario.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinTechBank.Persistence
+namespace FinTechBank.Usuario.Persistence
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
-        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<U.Usuario> Usuario { get; set; }
     }
 }

@@ -29,11 +29,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.API", "src\FinT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Domain", "src\FinTechBank.Domain\FinTechBank.Domain.csproj", "{4F13BCF4-705F-4706-8502-7B66012EF50F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Application.Dtos", "src\FinTechBank.Application.Dtos\FinTechBank.Application.Dtos.csproj", "{9A956525-C00C-42FD-9717-672997F7CA64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Application.Dtos", "src\FinTechBank.Application.Dtos\FinTechBank.Application.Dtos.csproj", "{9A956525-C00C-42FD-9717-672997F7CA64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Application.UseCases", "src\FinTechBank.Application.UseCases\FinTechBank.Application.UseCases.csproj", "{306FFA61-24DF-4A2C-9B01-63B9CA28BF2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Application.UseCases", "src\FinTechBank.Application.UseCases\FinTechBank.Application.UseCases.csproj", "{306FFA61-24DF-4A2C-9B01-63B9CA28BF2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Persistence", "src\FinTechBank.Persistence\FinTechBank.Persistence.csproj", "{D0235F26-F04B-4D12-B500-E3861B6C49CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTechBank.Persistence", "src\FinTechBank.Persistence\FinTechBank.Persistence.csproj", "{D0235F26-F04B-4D12-B500-E3861B6C49CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuarios.API", "src\FinTechBank.Usuarios.API\FinTechBank.Usuarios.API.csproj", "{3BAAE009-6FA9-4210-BC1E-D2194CF95E3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuario.Application.UseCases", "src\FinTechBank.Usuario.Application.UseCases\FinTechBank.Usuario.Application.UseCases.csproj", "{941131B7-DCE6-492E-A1AF-A3C24DA5967D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuario.Dtos", "src\FinTechBank.Usuario.Dtos\FinTechBank.Usuario.Dtos.csproj", "{86F9428F-494D-4BC9-8764-99ECE1FADFF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuario.Domain", "src\FinTechBank.Usuario.Domain\FinTechBank.Usuario.Domain.csproj", "{E17B0405-F7E2-4595-B6F4-BCC130297940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTechBank.Usuario.Persistence", "src\FinTechBank.Usuario.Persistence\FinTechBank.Usuario.Persistence.csproj", "{094F8C46-36EA-443D-83C3-D1FCB6878CA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +71,26 @@ Global
 		{D0235F26-F04B-4D12-B500-E3861B6C49CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0235F26-F04B-4D12-B500-E3861B6C49CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0235F26-F04B-4D12-B500-E3861B6C49CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BAAE009-6FA9-4210-BC1E-D2194CF95E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BAAE009-6FA9-4210-BC1E-D2194CF95E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BAAE009-6FA9-4210-BC1E-D2194CF95E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BAAE009-6FA9-4210-BC1E-D2194CF95E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{941131B7-DCE6-492E-A1AF-A3C24DA5967D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{941131B7-DCE6-492E-A1AF-A3C24DA5967D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{941131B7-DCE6-492E-A1AF-A3C24DA5967D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{941131B7-DCE6-492E-A1AF-A3C24DA5967D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F9428F-494D-4BC9-8764-99ECE1FADFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F9428F-494D-4BC9-8764-99ECE1FADFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F9428F-494D-4BC9-8764-99ECE1FADFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F9428F-494D-4BC9-8764-99ECE1FADFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E17B0405-F7E2-4595-B6F4-BCC130297940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17B0405-F7E2-4595-B6F4-BCC130297940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17B0405-F7E2-4595-B6F4-BCC130297940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17B0405-F7E2-4595-B6F4-BCC130297940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{094F8C46-36EA-443D-83C3-D1FCB6878CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{094F8C46-36EA-443D-83C3-D1FCB6878CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{094F8C46-36EA-443D-83C3-D1FCB6878CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{094F8C46-36EA-443D-83C3-D1FCB6878CA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +110,11 @@ Global
 		{9A956525-C00C-42FD-9717-672997F7CA64} = {BCB012C4-D386-44D8-A692-C368D09CE19D}
 		{306FFA61-24DF-4A2C-9B01-63B9CA28BF2F} = {BCB012C4-D386-44D8-A692-C368D09CE19D}
 		{D0235F26-F04B-4D12-B500-E3861B6C49CB} = {C49DF4DC-C67F-499F-ABEB-DEFC00FB358A}
+		{3BAAE009-6FA9-4210-BC1E-D2194CF95E3F} = {D5E1FD3D-151F-4C8B-ADD8-9E5C5A6C5CD3}
+		{941131B7-DCE6-492E-A1AF-A3C24DA5967D} = {72E2EC2C-6D95-4632-B100-FEBD885F5A5A}
+		{86F9428F-494D-4BC9-8764-99ECE1FADFF6} = {72E2EC2C-6D95-4632-B100-FEBD885F5A5A}
+		{E17B0405-F7E2-4595-B6F4-BCC130297940} = {BCDFA4DD-EC7E-4CF9-817B-FB870F0FCC80}
+		{094F8C46-36EA-443D-83C3-D1FCB6878CA3} = {02FAEF3B-045E-4AF6-8379-04F7DBF17926}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C8B5CC2-D758-4968-ABCF-5A6E08179CAD}
