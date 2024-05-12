@@ -37,6 +37,7 @@ builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetEx
 
 //Inyectamos los servicios a nuestra clase program.cs
 builder.Services.AddScoped<IRequestHandler<CrearUsuario.CrearUsuarioCommand, Result<UsuarioDto>>, CrearUsuario.Handler>();
+builder.Services.AddScoped<IRequestHandler<Login.LoginCommand, Result<UsuarioDto>>, Login.Handler>();
 
 // Configuración de Swagger
 builder.Services.AddSwaggerGen(c =>
@@ -88,6 +89,7 @@ app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

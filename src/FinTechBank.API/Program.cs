@@ -6,6 +6,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,11 +25,27 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
+
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("Jwt:SecretKey") ?? string.Empty));
+// Configurar la autenticación con JWT
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = key,
+        };
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 
 // Configuración de nuestra BD en PG
 var connectionString = builder.Configuration.GetConnectionString("ConexionPG");
@@ -77,6 +96,20 @@ builder.Services.AddSwaggerGen(c =>
                 Array.Empty<string>()
             }
         });
+});
+
+// Configurar la autorización
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireLoggedIn", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+    });
+
+    options.AddPolicy("RequireAdminRole", policy =>
+    {
+        policy.RequireRole("Admin");
+    });
 });
 
 var app = builder.Build();

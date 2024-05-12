@@ -28,12 +28,12 @@ namespace FinTechBank.Usuarios.API.Controllers
             return Ok(response);
         }
 
-        //[HttpPost("login")]
-        //public async Task<IActionResult> Login(LoginCommand command)
-        //{
-        //    //Se retorna un UserDto con los datos del usuario logueado mas el Token
-        //    var response = await _mediator.Send(command);
-        //    return Ok(response);
-        //}
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(Login.LoginCommand command)
+        {
+            //Se retorna un UserDto con los datos del usuario logueado mas el Token
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
     }
 }
