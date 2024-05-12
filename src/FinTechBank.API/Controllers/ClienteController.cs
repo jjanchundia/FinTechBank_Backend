@@ -34,14 +34,14 @@ namespace FinTechBank.API.Controllers
         }
 
         [HttpPost("crear")]
-        public async Task<IActionResult> CreateCliente(AgregarCliente command)
+        public async Task<IActionResult> CreateCliente(AgregarCliente.AgregarClienteCommand command)
         {
             var response = await _mediator.Send(command);
             return Ok(response);
         }
 
         [HttpPost("editar")]
-        public async Task<IActionResult> EditCliente(EditarCliente command)
+        public async Task<IActionResult> EditCliente(EditarCliente.EditarClienteCommand command)
         {
             var response = await _mediator.Send(command);
             return Ok(response);

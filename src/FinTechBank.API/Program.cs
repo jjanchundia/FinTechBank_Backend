@@ -1,4 +1,8 @@
 using Biblioteca.Persistence;
+using FinTechBank.Application.Dtos;
+using FinTechBank.Application.UseCases.Clientes;
+using FinTechBank.Domain;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -33,6 +37,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Registro de servicio MediatR
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
+//Inyectamos los servicios a nuestra clase program.cs
+builder.Services.AddScoped<IRequestHandler<ConsultarCliente.ConsultarClienteRequest, Result<List<ClienteDto>>>, ConsultarCliente.Handler>();
+builder.Services.AddScoped<IRequestHandler<AgregarCliente.AgregarClienteCommand, Result<ClienteDto>>, AgregarCliente.Handler>();
+builder.Services.AddScoped<IRequestHandler<EliminarCliente.EliminarClienteCommand, Result<string>>, EliminarCliente.Handler>();
+builder.Services.AddScoped<IRequestHandler<EditarCliente.EditarClienteCommand, Result<ClienteDto>>, EditarCliente.Handler>(); 
 
 // Configuración de Swagger
 builder.Services.AddSwaggerGen(c =>
