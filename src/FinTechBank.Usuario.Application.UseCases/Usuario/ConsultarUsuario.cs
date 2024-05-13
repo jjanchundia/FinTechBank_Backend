@@ -31,7 +31,7 @@ namespace FinTechBank.Usuario.Application.UseCases.Usuario
                     return Result<UsuarioDto>.Failure("No se encontró usuario!");
                 }
 
-                var librosDto = new UsuarioDto
+                var usuarioDto = new UsuarioDto
                 {
                     Id = user.Id,
                     Nombres = user.Nombres,
@@ -41,7 +41,7 @@ namespace FinTechBank.Usuario.Application.UseCases.Usuario
                     Role = user.Role
                 };
 
-                return Result<UsuarioDto>.Success(librosDto);
+                return Result<UsuarioDto>.Success(usuarioDto);
             }
         }
     }

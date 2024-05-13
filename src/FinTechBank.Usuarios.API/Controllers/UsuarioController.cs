@@ -18,6 +18,13 @@ namespace FinTechBank.Usuarios.API.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ConsultarUsuarios()
+        {
+            var response = await _mediator.Send(new ConsultarListaUsuarios.ConsultarUsuarioCommand());
+            return Ok(response);
+        }
+
         [HttpGet("{usuarioId:int}")]
         public async Task<IActionResult> ConsultarUsuarioPorId(int usuarioId)
         {
@@ -30,6 +37,13 @@ namespace FinTechBank.Usuarios.API.Controllers
         {
             var response = await _mediator.Send(command);
 
+            return Ok(response);
+        }
+
+        [HttpPut("editar")]
+        public async Task<IActionResult> EditUsuario(EditarUsuario.EditarUsuarioCommand command)
+        {
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
 

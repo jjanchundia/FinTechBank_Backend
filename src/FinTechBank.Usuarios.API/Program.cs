@@ -37,8 +37,10 @@ builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetEx
 
 //Inyectamos los servicios a nuestra clase program.cs
 builder.Services.AddScoped<IRequestHandler<CrearUsuario.CrearUsuarioCommand, Result<UsuarioDto>>, CrearUsuario.Handler>();
+builder.Services.AddScoped<IRequestHandler<EditarUsuario.EditarUsuarioCommand, Result<UsuarioDto>>, EditarUsuario.Handler>();
 builder.Services.AddScoped<IRequestHandler<Login.LoginCommand, Result<UsuarioDto>>, Login.Handler>();
 builder.Services.AddScoped<IRequestHandler<ConsultarUsuario.ConsultarUsuarioCommand, Result<UsuarioDto>>, ConsultarUsuario.Handler>();
+builder.Services.AddScoped<IRequestHandler<ConsultarListaUsuarios.ConsultarUsuarioCommand, Result<List<UsuarioDto>>>, ConsultarListaUsuarios.Handler>();
 
 // Configuración de Swagger
 builder.Services.AddSwaggerGen(c =>

@@ -40,57 +40,68 @@ namespace FinTechBank.Application.UseCases.Clientes
 
             public async Task<Result<ClienteDto>> Handle(AgregarClienteCommand request, CancellationToken cancellationToken)
             {
-                var usuario = await _usuarioService.GetUsuario(request.UsuarioId);
-
-                var nuevo = new Domain.Cliente()
+                try
                 {
-                    ClienteId = request.ClienteId,
-                    Nombre = request.Nombre,
-                    Apellido = request.Apellido,
-                    NumeroCuenta = request.NumeroCuenta,
-                    Saldo = request.Saldo,
-                    FechaNacimiento = request.FechaNacimiento,
-                    Direccion = request.Direccion,
-                    Telefono = request.Telefono,
-                    Correo = request.Correo,
-                    TipoCliente = request.TipoCliente,
-                    EstadoCivil = request.EstadoCivil,
-                    NumeroIdentificacion = request.NumeroIdentificacion,
-                    ProfesionOcupacion = request.ProfesionOcupacion,
-                    Genero = request.Genero,
-                    Nacionalidad = request.Nacionalidad,
-                    UsuarioId = request.UsuarioId
-                };
+                    var usuario = await _usuarioService.GetUsuario(request.UsuarioId);
 
-                await _dbcontext.Cliente.AddAsync(nuevo);
-                await _dbcontext.SaveChangesAsync();
+                    DateTime dateTime = request.FechaNacimiento;
+                    DateTime dateTimeUtc = dateTime.ToUniversalTime();
 
-                var ultimoIdInsertado = nuevo.ClienteId;
+                    var nuevo = new Domain.Cliente()
+                    {
+                        ClienteId = request.ClienteId,
+                        Nombre = request.Nombre,
+                        Apellido = request.Apellido,
+                        NumeroCuenta = request.NumeroCuenta,
+                        Saldo = request.Saldo,
+                        FechaNacimiento = dateTimeUtc,
+                        Direccion = request.Direccion,
+                        Telefono = request.Telefono,
+                        Correo = request.Correo,
+                        TipoCliente = request.TipoCliente,
+                        EstadoCivil = request.EstadoCivil,
+                        NumeroIdentificacion = request.NumeroIdentificacion,
+                        ProfesionOcupacion = request.ProfesionOcupacion,
+                        Genero = request.Genero,
+                        Nacionalidad = request.Nacionalidad,
+                        UsuarioId = request.UsuarioId
+                    };
 
-                return Result<ClienteDto>.Success(new ClienteDto
+                    await _dbcontext.Cliente.AddAsync(nuevo);
+                    await _dbcontext.SaveChangesAsync();
+
+                    var ultimoIdInsertado = nuevo.ClienteId;
+
+                    return Result<ClienteDto>.Success(new ClienteDto
+                    {
+                        ClienteId = ultimoIdInsertado,
+                        Nombre = request.Nombre,
+                        Apellido = request.Apellido,
+                        NumeroCuenta = request.NumeroCuenta,
+                        Saldo = request.Saldo,
+                        FechaNacimiento = request.FechaNacimiento,
+                        Direccion = request.Direccion,
+                        Telefono = request.Telefono,
+                        Correo = request.Correo,
+                        TipoCliente = request.TipoCliente,
+                        EstadoCivil = request.EstadoCivil,
+                        NumeroIdentificacion = request.NumeroIdentificacion,
+                        ProfesionOcupacion = request.ProfesionOcupacion,
+                        Genero = request.Genero,
+                        Nacionalidad = request.Nacionalidad,
+                        UsuarioId = request.UsuarioId,
+                        Nombres = usuario.usuario.Nombres,
+                        Apellidos = usuario.usuario.Apellidos,
+                        Username = usuario.usuario.Username,
+                        Password = usuario.usuario.Password,
+                        Role = usuario.usuario.Role
+                    });
+                }
+                catch (Exception e)
                 {
-                    ClienteId = ultimoIdInsertado,
-                    Nombre = request.Nombre,
-                    Apellido = request.Apellido,
-                    NumeroCuenta = request.NumeroCuenta,
-                    Saldo = request.Saldo,
-                    FechaNacimiento = request.FechaNacimiento,
-                    Direccion = request.Direccion,
-                    Telefono = request.Telefono,
-                    Correo = request.Correo,
-                    TipoCliente = request.TipoCliente,
-                    EstadoCivil = request.EstadoCivil,
-                    NumeroIdentificacion = request.NumeroIdentificacion,
-                    ProfesionOcupacion = request.ProfesionOcupacion,
-                    Genero = request.Genero,
-                    Nacionalidad = request.Nacionalidad,
-                    UsuarioId = request.UsuarioId,
-                    Nombres = usuario.usuario.Nombres,
-                    Apellidos = usuario.usuario.Apellidos,
-                    Username = usuario.usuario.Username,
-                    Password = usuario.usuario.Password,
-                    Role = usuario.usuario.Role
-                });
+                    Console.WriteLine("Error", e.Message);
+                    throw;
+                }
             }
         }
     }

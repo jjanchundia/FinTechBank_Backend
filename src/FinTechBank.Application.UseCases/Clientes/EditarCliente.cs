@@ -41,63 +41,74 @@ namespace FinTechBank.Application.UseCases.Clientes
 
             public async Task<C.Result<ClienteDto>> Handle(EditarClienteCommand request, CancellationToken cancellationToken)
             {
-                var usuario = await _usuarioService.GetUsuario(request.UsuarioId);
-
-                if (usuario.usuario == null)
+                try
                 {
-                    return C.Result<ClienteDto>.Failure("No se encontró usuario!");
+                    var usuario = await _usuarioService.GetUsuario(request.UsuarioId);
+
+                    if (usuario.usuario == null)
+                    {
+                        return C.Result<ClienteDto>.Failure("No se encontró usuario!");
+                    }
+
+                    var cliente = await _dbcontext.Cliente.Where(x => x.ClienteId == request.ClienteId).FirstOrDefaultAsync();
+                    if (cliente == null)
+                    {
+                        return C.Result<ClienteDto>.Failure("No se encontró cliente para actualizar!");
+                    }
+
+                    DateTime dateTime = request.FechaNacimiento;
+                    DateTime dateTimeUtc = dateTime.ToUniversalTime();
+
+                    // Actualizar los campos del cliente con los valores proporcionados en la solicitud
+                    cliente.Nombre = request.Nombre;
+                    cliente.Apellido = request.Apellido;
+                    cliente.NumeroCuenta = request.NumeroCuenta;
+                    cliente.Saldo = request.Saldo;
+                    cliente.FechaNacimiento = dateTimeUtc;
+                    cliente.Direccion = request.Direccion;
+                    cliente.Telefono = request.Telefono;
+                    cliente.Correo = request.Correo;
+                    cliente.TipoCliente = request.TipoCliente;
+                    cliente.EstadoCivil = request.EstadoCivil;
+                    cliente.NumeroIdentificacion = request.NumeroIdentificacion;
+                    cliente.ProfesionOcupacion = request.ProfesionOcupacion;
+                    cliente.Genero = request.Genero;
+                    cliente.Nacionalidad = request.Nacionalidad;
+                    cliente.UsuarioId = request.UsuarioId;
+
+                    // Guardar los cambios en la base de datos
+                    await _dbcontext.SaveChangesAsync();
+
+                    return C.Result<ClienteDto>.Success(new ClienteDto
+                    {
+                        ClienteId = request.ClienteId,
+                        Nombre = request.Nombre,
+                        Apellido = request.Apellido,
+                        NumeroCuenta = request.NumeroCuenta,
+                        Saldo = request.Saldo,
+                        FechaNacimiento = request.FechaNacimiento,
+                        Direccion = request.Direccion,
+                        Telefono = request.Telefono,
+                        Correo = request.Correo,
+                        TipoCliente = request.TipoCliente,
+                        EstadoCivil = request.EstadoCivil,
+                        NumeroIdentificacion = request.NumeroIdentificacion,
+                        ProfesionOcupacion = request.ProfesionOcupacion,
+                        Genero = request.Genero,
+                        Nacionalidad = request.Nacionalidad,
+                        UsuarioId = request.UsuarioId,
+                        Nombres = usuario.usuario.Nombres,
+                        Apellidos = usuario.usuario.Apellidos,
+                        Username = usuario.usuario.Username,
+                        Password = usuario.usuario.Password,
+                        Role = usuario.usuario.Role
+                    });
                 }
-
-                var cliente = await _dbcontext.Cliente.Where(x => x.ClienteId == request.ClienteId).FirstOrDefaultAsync();
-                if (cliente == null)
+                catch (Exception e)
                 {
-                    return C.Result<ClienteDto>.Failure("No se encontró cliente para actualizar!");
+                    await Console.Out.WriteLineAsync(e.Message);
+                    return C.Result<ClienteDto>.Failure($"Error interno:! { e.Message }");
                 }
-
-                // Actualizar los campos del cliente con los valores proporcionados en la solicitud
-                cliente.Nombre = request.Nombre;
-                cliente.Apellido = request.Apellido;
-                cliente.NumeroCuenta = request.NumeroCuenta;
-                cliente.Saldo = request.Saldo;
-                cliente.FechaNacimiento = request.FechaNacimiento;
-                cliente.Direccion = request.Direccion;
-                cliente.Telefono = request.Telefono;
-                cliente.Correo = request.Correo;
-                cliente.TipoCliente = request.TipoCliente;
-                cliente.EstadoCivil = request.EstadoCivil;
-                cliente.NumeroIdentificacion = request.NumeroIdentificacion;
-                cliente.ProfesionOcupacion = request.ProfesionOcupacion;
-                cliente.Genero = request.Genero;
-                cliente.Nacionalidad = request.Nacionalidad;
-                cliente.UsuarioId = request.UsuarioId;
-
-                // Guardar los cambios en la base de datos
-                await _dbcontext.SaveChangesAsync();
-
-                return C.Result<ClienteDto>.Success(new ClienteDto
-                {
-                    ClienteId = request.ClienteId,
-                    Nombre = request.Nombre,
-                    Apellido = request.Apellido,
-                    NumeroCuenta = request.NumeroCuenta,
-                    Saldo = request.Saldo,
-                    FechaNacimiento = request.FechaNacimiento,
-                    Direccion = request.Direccion,
-                    Telefono = request.Telefono,
-                    Correo = request.Correo,
-                    TipoCliente = request.TipoCliente,
-                    EstadoCivil = request.EstadoCivil,
-                    NumeroIdentificacion = request.NumeroIdentificacion,
-                    ProfesionOcupacion = request.ProfesionOcupacion,
-                    Genero = request.Genero,
-                    Nacionalidad = request.Nacionalidad,
-                    UsuarioId = request.UsuarioId,
-                    Nombres = usuario.usuario.Nombres,
-                    Apellidos = usuario.usuario.Apellidos,
-                    Username = usuario.usuario.Username,
-                    Password = usuario.usuario.Password,
-                    Role = usuario.usuario.Role
-                });
             }
         }
     }
